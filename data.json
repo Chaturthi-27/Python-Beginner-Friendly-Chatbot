@@ -1,0 +1,156 @@
+{
+    "greeting": {
+        "keywords": [
+            "hi",
+            "hello",
+            "hey",
+            "good morning",
+            "good afternoon",
+            "good evening"
+        ],
+        "responses": [
+            "Hello! 👋 How can I help you today?"
+        ]
+    },
+
+    "name": {
+        "keywords": [
+            "your name",
+            "who are you",
+            "what are you called"
+        ],
+        "responses": [
+            "I am ChatBuddy, an AI programming assistant built using Python, Flask, SQLite and Llama."
+        ]
+    },
+
+    "introduction": {
+        "keywords": [
+            "introduce yourself",
+            "tell me about yourself",
+            "what can you do",
+            "about you"
+        ],
+        "responses": [
+            "I am ChatBuddy! I can explain programming concepts, generate code, debug programs, explain errors and help you learn programming."
+        ]
+    },
+
+    "help": {
+        "keywords": [
+            "help",
+            "assist",
+            "support",
+            "what should i ask"
+        ],
+        "responses": [
+            "You can ask me to explain programming concepts, generate code, debug code, fix errors, explain code line by line, or learn Python, Java, C, HTML, CSS, JavaScript and SQL."
+        ]
+    },
+
+    "python": {
+        "keywords": [
+            "what is python",
+            "python definition"
+        ],
+        "responses": [
+            "Python is a beginner-friendly, high-level programming language known for its simple and readable syntax. You can also ask me to generate or debug Python code."
+        ]
+    },
+
+    "programming": {
+        "keywords": [
+            "what is programming",
+            "programming definition"
+        ],
+        "responses": [
+            "Programming is the process of writing instructions that tell a computer how to perform a task. I can also help you write and debug programs."
+        ]
+    },
+
+    "flask": {
+        "keywords": [
+            "what is flask",
+            "flask definition"
+        ],
+        "responses": [
+            "Flask is a lightweight Python web framework used to create web applications. This chatbot itself uses Flask for its backend."
+        ]
+    },
+
+    "database": {
+        "keywords": [
+            "what is database",
+            "database definition"
+        ],
+        "responses": [
+            "A database is a system used to store, organize and retrieve information. This project uses SQLite to store chatbot conversations."
+        ]
+    },
+
+    "sqlite": {
+        "keywords": [
+            "what is sqlite",
+            "sqlite definition"
+        ],
+        "responses": [
+            "SQLite is a lightweight database system that stores the database in a single file. This project uses db.sqlite to store chat history."
+        ]
+    },
+
+    "chatbot": {
+        "keywords": [
+            "what is chatbot",
+            "chatbot definition"
+        ],
+        "responses": [
+            "A chatbot is a software application that communicates with users through text or voice. This project combines a Python web application with a local Llama model."
+        ]
+    },
+
+    "college": {
+        "keywords": [
+            "college",
+            "student",
+            "study",
+            "exam",
+            "assignment",
+            "project",
+            "class"
+        ],
+        "responses": [
+            "College projects are a great way to improve your programming skills. You can ask me to help with programming assignments and projects."
+        ]
+    },
+
+    "thanks": {
+        "keywords": [
+            "thank you",
+            "thanks",
+            "thank u",
+            "appreciate it"
+        ],
+        "responses": [
+            "You're welcome! 😊 Happy to help."
+        ]
+    },
+
+    "goodbye": {
+        "keywords": [
+            "bye",
+            "goodbye",
+            "see you",
+            "exit",
+            "quit"
+        ],
+        "responses": [
+            "Goodbye! 👋 Have a great day!"
+        ]
+    },
+
+    "fallback": {
+        "responses": [
+            "I can help with programming, code generation, debugging, code explanation and general programming questions."
+        ]
+    }
+}

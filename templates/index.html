@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Python AI Programming Chatbot</title>
+
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        body {
+
+            background-color: #f5f7fa;
+
+        }
+
+
+        .hero-section {
+
+            padding-top: 70px;
+
+            padding-bottom: 40px;
+
+        }
+
+
+        /* Chat button */
+
+        #chatToggleBtn {
+
+            position: fixed;
+
+            bottom: 25px;
+
+            right: 25px;
+
+            width: 60px;
+
+            height: 60px;
+
+            border-radius: 50%;
+
+            font-size: 25px;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 4px 12px
+                rgba(0, 0, 0, 0.25);
+
+        }
+
+
+        /* Chat window */
+
+        #chatWindow {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 100px;
+
+            width: 400px;
+
+            max-width: 92vw;
+
+            height: 550px;
+
+            max-height: 80vh;
+
+            display: none;
+
+            flex-direction: column;
+
+            z-index: 999;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 25px
+                rgba(0, 0, 0, 0.25);
+
+        }
+
+
+        /* Messages */
+
+        #chatMessages {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 15px;
+
+            background-color: white;
+
+        }
+
+
+        .message {
+
+            max-width: 88%;
+
+            padding: 10px 14px;
+
+            margin-bottom: 12px;
+
+            border-radius: 15px;
+
+            word-wrap: break-word;
+
+            white-space: pre-wrap;
+
+        }
+
+
+        .user-message {
+
+            background-color: #0d6efd;
+
+            color: white;
+
+            margin-left: auto;
+
+            border-bottom-right-radius: 3px;
+
+        }
+
+
+        .bot-message {
+
+            background-color: #e9ecef;
+
+            color: #212529;
+
+            margin-right: auto;
+
+            border-bottom-left-radius: 3px;
+
+        }
+
+
+        /* Code inside chatbot */
+
+        .bot-message pre {
+
+            background-color: #212529;
+
+            color: #f8f9fa;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            overflow-x: auto;
+
+            margin-top: 10px;
+
+            white-space: pre;
+
+        }
+
+
+        .bot-message code {
+
+            font-family: Consolas, monospace;
+
+        }
+
+
+        /* Typing message */
+
+        .typing {
+
+            font-style: italic;
+
+            color: #6c757d;
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            #chatWindow {
+
+                right: 4%;
+
+                width: 92%;
+
+                bottom: 90px;
+
+                height: 72vh;
+
+            }
+
+
+            #chatToggleBtn {
+
+                right: 20px;
+
+                bottom: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<div class="container hero-section">
+
+
+    <div class="text-center">
+
+        <h1 class="display-5 fw-bold text-primary">
+
+            Python AI Programming Chatbot
+
+        </h1>
+
+
+        <p class="lead text-secondary">
+
+            Learn programming, generate code,
+            debug errors and understand code.
+
+        </p>
+
+    </div>
+
+
+    <!-- Features -->
+
+    <div class="row mt-5 g-4">
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5 class="text-primary">
+
+                        💻 Code Generation
+
+                    </h5>
+
+
+                    <p>
+
+                        Ask the chatbot to create
+                        programs in Python, Java,
+                        C and other languages.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5 class="text-primary">
+
+                        🐛 Code Debugging
+
+                    </h5>
+
+
+                    <p>
+
+                        Provide your code and ask
+                        the chatbot to identify
+                        and fix errors.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h5 class="text-primary">
+
+                        🧠 AI + Memory
+
+                    </h5>
+
+
+                    <p>
+
+                        Llama provides intelligent
+                        responses while SQLite
+                        stores previous conversations.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Instructions -->
+
+    <div class="alert alert-info mt-5 text-center">
+
+        💬 Click the chatbot button in the
+        bottom-right corner to start.
+
+    </div>
+
+
+    <!-- About -->
+
+    <div class="card shadow-sm mt-4">
+
+        <div class="card-body">
+
+            <h4 class="text-primary">
+
+                About This Project
+
+            </h4>
+
+
+            <p>
+
+                This project is a beginner-friendly
+                AI programming chatbot built using
+                Python, Flask, SQLite and Ollama.
+                It can answer programming questions,
+                generate code, explain code and help
+                debug programming errors.
+
+            </p>
+
+
+            <p class="mb-0">
+
+                <strong>Technologies:</strong>
+
+                Python, Flask, HTML, Bootstrap,
+                SQLite, JSON, Ollama and Llama 3.2.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CHAT BUTTON
+===================================================== -->
+
+<button
+    id="chatToggleBtn"
+    class="btn btn-primary"
+    type="button"
+    title="Open Chatbot"
+>
+
+    💬
+
+</button>
+
+
+<!-- =====================================================
+     CHAT WINDOW
+===================================================== -->
+
+<div
+    id="chatWindow"
+    class="card"
+>
+
+
+    <!-- Header -->
+
+    <div
+        class="
+            card-header
+            bg-primary
+            text-white
+            d-flex
+            justify-content-between
+            align-items-center
+        "
+    >
+
+        <div>
+
+            <strong>
+
+                🤖 ChatBuddy
+
+            </strong>
+
+
+            <br>
+
+
+            <small>
+
+                AI Programming Assistant
+
+            </small>
+
+        </div>
+
+
+        <button
+            id="closeChatBtn"
+            class="btn btn-sm btn-light"
+            type="button"
+        >
+
+            ✕
+
+        </button>
+
+    </div>
+
+
+    <!-- Messages -->
+
+    <div id="chatMessages">
+
+
+        <div class="message bot-message">
+
+            Hi! 👋 I'm ChatBuddy.
+
+            <br><br>
+
+            I can help you with:
+
+            <br>
+            • Generate code
+            <br>
+            • Debug code
+            <br>
+            • Fix errors
+            <br>
+            • Explain code
+            <br>
+            • Learn Python
+            <br>
+            • Learn programming
+            <br>
+            • SQL and databases
+
+            <br><br>
+
+            Try asking:
+
+            <br>
+
+            "Write a Python calculator"
+
+        </div>
+
+    </div>
+
+
+    <!-- Input -->
+
+    <div class="card-footer bg-white">
+
+        <div class="input-group">
+
+            <textarea
+                id="userInput"
+                class="form-control"
+                rows="2"
+                placeholder="Ask me to generate or debug code..."
+            ></textarea>
+
+
+            <button
+                id="sendBtn"
+                class="btn btn-primary"
+                type="button"
+            >
+
+                Send
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    // Elements
+
+    const chatToggleBtn =
+        document.getElementById(
+            "chatToggleBtn"
+        );
+
+
+    const chatWindow =
+        document.getElementById(
+            "chatWindow"
+        );
+
+
+    const closeChatBtn =
+        document.getElementById(
+            "closeChatBtn"
+        );
+
+
+    const chatMessages =
+        document.getElementById(
+            "chatMessages"
+        );
+
+
+    const userInput =
+        document.getElementById(
+            "userInput"
+        );
+
+
+    const sendBtn =
+        document.getElementById(
+            "sendBtn"
+        );
+
+
+    // Open chatbot
+
+    chatToggleBtn.addEventListener(
+        "click",
+        function() {
+
+            if (
+                chatWindow.style.display
+                === "flex"
+            ) {
+
+                chatWindow.style.display =
+                    "none";
+
+            }
+
+            else {
+
+                chatWindow.style.display =
+                    "flex";
+
+                userInput.focus();
+
+            }
+
+        }
+    );
+
+
+    // Close chatbot
+
+    closeChatBtn.addEventListener(
+        "click",
+        function() {
+
+            chatWindow.style.display =
+                "none";
+
+        }
+    );
+
+
+    // Add message
+
+    function addMessage(
+        message,
+        sender
+    ) {
+
+        const messageDiv =
+            document.createElement(
+                "div"
+            );
+
+
+        messageDiv.classList.add(
+            "message"
+        );
+
+
+        if (sender === "user") {
+
+            messageDiv.classList.add(
+                "user-message"
+            );
+
+            messageDiv.textContent =
+                message;
+
+        }
+
+        else {
+
+            messageDiv.classList.add(
+                "bot-message"
+            );
+
+            /*
+             * Convert simple Markdown code blocks
+             * into HTML.
+             */
+
+            const parts =
+                message.split(
+                    "```"
+                );
+
+
+            if (parts.length === 1) {
+
+                messageDiv.textContent =
+                    message;
+
+            }
+
+            else {
+
+                for (
+                    let i = 0;
+                    i < parts.length;
+                    i++
+                ) {
+
+                    if (i % 2 === 0) {
+
+                        const text =
+                            document.createTextNode(
+                                parts[i]
+                            );
+
+                        messageDiv.appendChild(
+                            text
+                        );
+
+                    }
+
+                    else {
+
+                        const pre =
+                            document.createElement(
+                                "pre"
+                            );
+
+
+                        const code =
+                            document.createElement(
+                                "code"
+                            );
+
+
+                        code.textContent =
+                            parts[i]
+                                .replace(
+                                    /^[a-zA-Z]+\n/,
+                                    ""
+                                );
+
+
+                        pre.appendChild(
+                            code
+                        );
+
+
+                        messageDiv.appendChild(
+                            pre
+                        );
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        chatMessages.appendChild(
+            messageDiv
+        );
+
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+
+    }
+
+
+    // =================================================
+    // TYPING INDICATOR
+    // =================================================
+
+    function showTyping() {
+
+        const typing =
+            document.createElement(
+                "div"
+            );
+
+
+        typing.id =
+            "typingMessage";
+
+
+        typing.classList.add(
+            "message",
+            "bot-message",
+            "typing"
+        );
+
+
+        typing.textContent =
+            "ChatBuddy is thinking...";
+
+
+        chatMessages.appendChild(
+            typing
+        );
+
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+
+    }
+
+
+    function removeTyping() {
+
+        const typing =
+            document.getElementById(
+                "typingMessage"
+            );
+
+
+        if (typing) {
+
+            typing.remove();
+
+        }
+
+    }
+
+
+    // =================================================
+    // SEND MESSAGE
+    // =================================================
+
+    function sendMessage() {
+
+        const message =
+            userInput.value.trim();
+
+
+        if (message === "") {
+
+            return;
+
+        }
+
+
+        // Display user message
+
+        addMessage(
+            message,
+            "user"
+        );
+
+
+        // Clear textarea
+
+        userInput.value = "";
+
+
+        // Disable button
+
+        sendBtn.disabled = true;
+
+
+        // Show typing
+
+        showTyping();
+
+
+        // Send to Flask
+
+        fetch(
+            "/chat",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    message: message
+
+                })
+
+            }
+        )
+
+
+        .then(
+            function(response) {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server error: "
+                        + response.status
+                    );
+
+                }
+
+
+                return response.json();
+
+            }
+        )
+
+
+        .then(
+            function(data) {
+
+                removeTyping();
+
+
+                addMessage(
+                    data.response,
+                    "bot"
+                );
+
+            }
+        )
+
+
+        .catch(
+            function(error) {
+
+                console.error(
+                    "Chatbot error:",
+                    error
+                );
+
+
+                removeTyping();
+
+
+                addMessage(
+
+                    "Sorry, I could not connect " +
+                    "to the AI. Make sure Ollama " +
+                    "is running and llama3.2:latest " +
+                    "is installed.",
+
+                    "bot"
+
+                );
+
+            }
+        )
+
+
+        .finally(
+            function() {
+
+                sendBtn.disabled =
+                    false;
+
+                userInput.focus();
+
+            }
+        );
+
+    }
+
+
+    // Send button
+
+    sendBtn.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    // Enter = send
+    // Shift + Enter = new line
+
+    userInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+                &&
+                !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
